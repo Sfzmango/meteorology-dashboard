@@ -1,3 +1,9 @@
-:root {
+body {
+    font-family: "Righteous", 'Open Sans', sans-serif;
     font-size: 14px;
+    line-height: 1;
+}
+
+.jumbotron {
+    border-bottom: 5px solid black;
 }
