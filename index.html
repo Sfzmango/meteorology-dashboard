@@ -9,6 +9,8 @@
     <!-- bootstrap css-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
     <link rel="stylesheet" href="./assets/css/styles.css">
 
     <title>Meteorology Dashboard</title>
@@ -16,7 +18,93 @@
 
 <body>
 
+    <div class="jumbotron jumbotron-fluid bg-dark text-white text-center p-3">
+        <div class="container">
+            <h1 class="display-4">Meteorology Dashboard</h1>
+        </div>
+    </div>
 
+    <div class="row">
+        <div class="col-3 m-4">
+            <div class="row">
+                <div class="input-group mb-3">
+                    <h3>Search for a city's forecast:</h3>
+                    <input type="text" class="form-control" placeholder="City Name" aria-label="City Name"
+                        aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button"><i class="bi bi-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <ul class=" list-group-flush" id="recentSearches">
+                    <li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100">Past
+                            Searched City</button></li>
+                    <li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100">Past
+                            Searched City</button></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-8  m-4">
+            <div class="row mb-5">
+                <div class="card w-100 row-cols-4">
+                    <div class="card-body">
+                        <h5 class="card-title">City + Date + Icon</h5>
+                        <br>
+                        <h6 class="card-subtitle mb-2 text-muted">Weather</h6>
+                        <br>
+                        <p class="card-text">Temperature:</p>
+                        <p class="card-text">Humidity:</p>
+                        <p class="card-text">Wind Speed:</p>
+                        <p class="card-text">UV Index:</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="card col-2 m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Date</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Icon</h6>
+                        <p class="card-text">Temp:</p>
+                        <p class="card-text">Humidity:</p>
+                    </div>
+                </div>
+                <div class="card col-2 m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Date</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Icon</h6>
+                        <p class="card-text">Temp:</p>
+                        <p class="card-text">Humidity:</p>
+                    </div>
+                </div>
+                <div class="card col-2 m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Date</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Icon</h6>
+                        <p class="card-text">Temp:</p>
+                        <p class="card-text">Humidity:</p>
+                    </div>
+                </div>
+                <div class="card col-2 m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Date</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Icon</h6>
+                        <p class="card-text">Temp:</p>
+                        <p class="card-text">Humidity:</p>
+                    </div>
+                </div>
+                <div class="card col-2 m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Date</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">Icon</h6>
+                        <p class="card-text">Temp:</p>
+                        <p class="card-text">Humidity:</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <!-- jQuery js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
