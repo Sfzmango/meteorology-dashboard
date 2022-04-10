@@ -59,12 +59,13 @@ $("#searchBtn").on("click", function (event) {
                 // add uv index
                 $("#todayW").find('[data-type="uvIndex"]').text("UV Index: ");
 
-                // targets five day weather containers
-                $("#fiveDayW").find('[data-type="wHead"]').eq(0).text("aaaaa");
-                $("#fiveDayW").find('[data-type="weatherLogo"]').eq(1).text("aaaaa");
-                $("#fiveDayW").find('[data-type="temperature"]').eq(2).text("aaaaa");
-                $("#fiveDayW").find('[data-type="humidity"]').eq(3).text("aaaaa");
-
+                // targets five day weather containers and adds information
+                for (var i = 0; i < 5; i++) {
+                    $("#fiveDayW").find('[data-type="wHead"]').eq(i).text("Date: ");
+                    $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).text("Icon: ");
+                    $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: ");
+                    $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: ");
+                }
             })
     }
 
