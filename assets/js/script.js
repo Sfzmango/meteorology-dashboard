@@ -47,18 +47,23 @@ $("#searchBtn").on("click", function (event) {
 
                 // targets todayW container
                 // adds today date to the container with the id todayW
-                $("#todayW").children().children().children("h5").text("City: " + curMonth + "/" + curDay + "/" + curYear + " Icon");
+                $("#todayW").find('[data-type="wHead"]').text("City: " + curMonth + "/" + curDay + "/" + curYear);
                 // adds icon
-                $("#todayW").children().children().children("h6").text("icon: ")
+                $("#todayW").find('[data-type="weatherLogo"]').text("Icon: ")
                 // adds temperature value
-                $("#todayW").children().children().children("p:nth-of-type(1)").text("Temperature: ");
+                $("#todayW").find('[data-type="temperature"]').text("Temperature: ");
                 // adds humidity
-                $("#todayW").children().children().children("p:nth-of-type(2)").text("Humidity: ");
+                $("#todayW").find('[data-type="humidity"]').text("Humidity: ");
                 // adds wind speed
-                $("#todayW").children().children().children("p:nth-of-type(3)").text("Wind Speed: ");
+                $("#todayW").find('[data-type="wSpeed"]').text("Wind Speed: ");
                 // add uv index
-                $("#todayW").children().children().children("p:nth-of-type(4)").text("UV Index: ");
+                $("#todayW").find('[data-type="uvIndex"]').text("UV Index: ");
 
+                // targets five day weather containers
+                $("#fiveDayW").find('[data-type="wHead"]').eq(0).text("aaaaa");
+                $("#fiveDayW").find('[data-type="weatherLogo"]').eq(1).text("aaaaa");
+                $("#fiveDayW").find('[data-type="temperature"]').eq(2).text("aaaaa");
+                $("#fiveDayW").find('[data-type="humidity"]').eq(3).text("aaaaa");
 
             })
     }
