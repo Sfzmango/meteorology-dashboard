@@ -18,7 +18,7 @@ $("#searchBtn").on("click", function (event) {
         var lat = "";
         var lon = "";
 
-        // clears textbox after clicking the search button
+        // fetches data from the geolocation api
         fetch(requestGeoUrl)
             // turns url into a json string    
             .then(function (res) {
@@ -46,8 +46,8 @@ $("#searchBtn").on("click", function (event) {
                 }
 
                 // records location name
-                var cName = data[0].name;
-                console.log(cName);
+                var lName = data[0].name;
+                console.log(lName);
 
                 // records latitude
                 lat = data[0].lat;
@@ -57,33 +57,60 @@ $("#searchBtn").on("click", function (event) {
                 lon = data[0].lon;
                 console.log(lon);
 
-                //pulls latitude and longitude from geocoding api
-                var requestWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=0838a1f6c730425e60b39b77d73f4aad";
+                // pulls latitude and longitude from geocoding api
+                var requestWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=0838a1f6c730425e60b39b77d73f4aad";
 
-                // targets todayW container
-                // adds today date to the container with the id todayW
-                $("#todayW").find('[data-type="wHead"]').text(cName + " " + curMonth + "/" + curDay + "/" + curYear);
-                // adds icon
-                $("#todayW").find('[data-type="weatherLogo"]').text("Icon: ")
-                // adds temperature value
-                $("#todayW").find('[data-type="temperature"]').text("Temperature: ");
-                // adds humidity
-                $("#todayW").find('[data-type="humidity"]').text("Humidity: ");
-                // adds wind speed
-                $("#todayW").find('[data-type="wSpeed"]').text("Wind Speed: ");
-                // add uv index
-                $("#todayW").find('[data-type="uvIndex"]').text("UV Index: ");
+                // fetches data from weather api using geolocation api data
+                fetch(requestWeatherUrl)
+                    // turns url into a json string    
+                    .then(function (res) {
+                        return res.json();
+                    })
+                    .then(function (data) {
+                        console.log(data);
 
-                // targets five day weather containers and adds information
-                for (var i = 0; i < 5; i++) {
-                    $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i) + "/" + curYear);
-                    $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).text("Icon: ");
-                    $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: ");
-                    $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: ");
-                }
+                        var temp = data.daily[0].temp.day;
+                        console.log(temp);
+
+                        var humidity = data.daily[0].humidity;
+                        console.log(humidity);
+
+                        var wSpeed = data.daily[0].wind_speed;
+                        console.log(wSpeed);
+
+                        var uvi = data.daily[0].uvi;
+                        console.log(uvi);
+
+                        // targets todayW container
+                        // adds today date to the container with the id todayW
+                        $("#todayW").find('[data-type="wHead"]').text(lName + " " + curMonth + "/" + curDay + "/" + curYear);
+                        // adds icon
+                        $("#todayW").find('[data-type="weatherLogo"]').text("Icon: ")
+                        // adds temperature value
+                        $("#todayW").find('[data-type="temperature"]').text("Temperature: " + temp + "\u00B0F");
+                        // adds humidity
+                        $("#todayW").find('[data-type="humidity"]').text("Humidity: " + humidity + "%");
+                        // adds wind speed
+                        $("#todayW").find('[data-type="wSpeed"]').text("Wind Speed: " + wSpeed + "mph");
+                        // add uv index
+                        $("#todayW").find('[data-type="uvIndex"]').text("UV Index: " + uvi);
+
+                        // targets five day weather containers and adds information
+                        for (var i = 0; i < 5; i++) {
+
+                            temp = data.daily[i + 1].temp.day;
+                            humidity = data.daily[i + 1].humidity;
+
+                            $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i) + "/" + curYear);
+                            $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).text("Icon: ");
+                            $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: " + temp + "\u00B0F");
+                            $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: " + humidity + "%");
+                        }
+                    });
             })
     }
 
+    // clears textbox after clicking the search button
     $("#searchBox").val("");
 });
 
