@@ -6,6 +6,7 @@ var curYear = today.getFullYear();
 console.log(curMonth + "/" + curDay + "/" + curYear);
 var textEl;
 
+
 // function for dynamically creating a button for recent searches on clicking the search button
 function loadW() {
 
@@ -30,11 +31,14 @@ function loadW() {
                 if (data.length !== 0) {
                     if ($("#recentSearches").children().length < 5) {
                         $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
+                        console.log($("#recentSearches > li > button"));
+                        localStorage.setItem(textEl, $("#recentSearches > li > button"));
                     }
                     // if there is more than 5 searches, it will delete 
                     else if ($("#recentSearches").children().length === 5) {
                         $("#recentSearches").children().last().remove();
                         $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
+                        localStorage.setItem(textEl, $("#recentSearches > li > button"));
                     }
                 }
                 // logs out error if location does not exist
@@ -133,3 +137,4 @@ function test1(event) {
     console.log(textEl);
     loadW();
 }
+
