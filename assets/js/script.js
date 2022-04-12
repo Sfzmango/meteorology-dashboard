@@ -5,7 +5,7 @@ var curDay = today.getDate();
 var curYear = today.getFullYear();
 console.log(curMonth + "/" + curDay + "/" + curYear);
 var textEl;
-
+let citiesArray = JSON.parse(localStorage.getItem("cities")) || [];
 
 // function for dynamically creating a button for recent searches on clicking the search button
 function loadW() {
@@ -31,14 +31,11 @@ function loadW() {
                 if (data.length !== 0) {
                     if ($("#recentSearches").children().length < 5) {
                         $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
-                        console.log($("#recentSearches > li > button"));
-                        localStorage.setItem(textEl, $("#recentSearches > li > button"));
                     }
                     // if there is more than 5 searches, it will delete 
                     else if ($("#recentSearches").children().length === 5) {
                         $("#recentSearches").children().last().remove();
                         $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
-                        localStorage.setItem(textEl, $("#recentSearches > li > button"));
                     }
                 }
                 // logs out error if location does not exist
@@ -46,6 +43,12 @@ function loadW() {
                     console.log("error");
                     return;
                 }
+
+                // saves recent searchess
+                citiesArray.shift();
+                citiesArray.push($("#recentSearches").html());
+                console.log(citiesArray);
+                localStorage.setItem("cities", JSON.stringify(citiesArray));
 
                 // records location name
                 var lName = data[0].name;
@@ -109,7 +112,7 @@ function loadW() {
                             icon = data.daily[i + 1].weather[0].icon;
 
                             $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i) + "/" + curYear);
-                            $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
+                            $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).attr("src", "https://openweathermap.org/img/wn/" + icon + ".png");
                             $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: " + temp + "\u00B0F");
                             $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: " + humidity + "%");
                         }
@@ -138,3 +141,5 @@ function test1(event) {
     loadW();
 }
 
+// loads up any recent saves from the local storage
+$("#recentSearches").append(citiesArray);
