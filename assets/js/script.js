@@ -4,13 +4,11 @@ var curMonth = (today.getMonth() + 1);
 var curDay = today.getDate();
 var curYear = today.getFullYear();
 console.log(curMonth + "/" + curDay + "/" + curYear);
+var textEl;
 
 // function for dynamically creating a button for recent searches on clicking the search button
-$("#searchBtn").on("click", function (event) {
-    event.preventDefault();
+function loadW() {
 
-    // stores value in search text box as a variable
-    var textEl = $("#searchBox").val();
     // dynamically creates a button for recent searches. checks if the textbox contains value.
     if (textEl) {
         // request geolocation using geocoding api from open weather api
@@ -31,12 +29,12 @@ $("#searchBtn").on("click", function (event) {
                 // limits total recent searches up to 5
                 if (data.length !== 0) {
                     if ($("#recentSearches").children().length < 5) {
-                        $("#recentSearches").append('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block searches w-100">' + textEl + '</button></li>');
+                        $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
                     }
                     // if there is more than 5 searches, it will delete 
                     else if ($("#recentSearches").children().length === 5) {
                         $("#recentSearches").children().last().remove();
-                        $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block searches w-100">' + textEl + '</button></li>');
+                        $("#recentSearches").prepend('<li class="list-group-item"><button type="button" class="btn btn-primary btn-block w-100" onclick="test1(event)">' + textEl + '</button></li>');
                     }
                 }
                 // logs out error if location does not exist
@@ -117,14 +115,21 @@ $("#searchBtn").on("click", function (event) {
 
     // clears textbox after clicking the search button
     $("#searchBox").val("");
+};
+
+// executes the function to get the weather information when clicking the search button
+$("#searchBtn").on("click", function (event) {
+    event.preventDefault();
+
+    // stores value in search text box as a variable
+    textEl = $("#searchBox").val();
+    loadW();
 });
 
-
-
-// $(".searches").on("click", function (event) {
-//     event.preventDefault();
-
-//     var btnTextEl = ($(this)).val();
-//     console.log(btnTextEl);
-// });
-
+// executes the function to get the weather information when pressing one of the recent searches button
+function test1(event) {
+    event.preventDefault();
+    textEl = event.target.innerText;
+    console.log(textEl);
+    loadW();
+}
