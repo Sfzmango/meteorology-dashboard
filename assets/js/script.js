@@ -60,6 +60,7 @@ $("#searchBtn").on("click", function (event) {
                 // pulls latitude and longitude from geocoding api
                 var requestWeatherUrl = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=0838a1f6c730425e60b39b77d73f4aad";
 
+
                 // fetches data from weather api using geolocation api data
                 fetch(requestWeatherUrl)
                     // turns url into a json string    
@@ -81,11 +82,14 @@ $("#searchBtn").on("click", function (event) {
                         var uvi = data.daily[0].uvi;
                         console.log(uvi);
 
+                        var icon = data.daily[0].weather[0].icon;
+                        console.log(icon);
+
                         // targets todayW container
                         // adds today date to the container with the id todayW
                         $("#todayW").find('[data-type="wHead"]').text(lName + " " + curMonth + "/" + curDay + "/" + curYear);
-                        // adds icon
-                        $("#todayW").find('[data-type="weatherLogo"]').text("Icon: ")
+                        // adds weather icon
+                        $("#todayW").find('[data-type="weatherLogo"]').attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
                         // adds temperature value
                         $("#todayW").find('[data-type="temperature"]').text("Temperature: " + temp + "\u00B0F");
                         // adds humidity
@@ -100,9 +104,10 @@ $("#searchBtn").on("click", function (event) {
 
                             temp = data.daily[i + 1].temp.day;
                             humidity = data.daily[i + 1].humidity;
+                            icon = data.daily[i + 1].weather[0].icon;
 
                             $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i) + "/" + curYear);
-                            $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).text("Icon: ");
+                            $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).attr("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
                             $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: " + temp + "\u00B0F");
                             $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: " + humidity + "%");
                         }
