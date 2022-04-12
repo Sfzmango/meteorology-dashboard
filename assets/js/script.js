@@ -13,7 +13,7 @@ function loadW() {
     // dynamically creates a button for recent searches. checks if the textbox contains value.
     if (textEl) {
         // request geolocation using geocoding api from open weather api
-        var requestGeoUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + textEl + "&appid=0838a1f6c730425e60b39b77d73f4aad";
+        var requestGeoUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + textEl + "&appid=0838a1f6c730425e60b39b77d73f4aad";
         var lat = "";
         var lon = "";
 
