@@ -111,7 +111,7 @@ function loadW() {
                             humidity = data.daily[i + 1].humidity;
                             icon = data.daily[i + 1].weather[0].icon;
 
-                            $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i) + "/" + curYear);
+                            $("#fiveDayW").find('[data-type="wHead"]').eq(i).text(curMonth + "/" + (curDay + i + 1) + "/" + curYear);
                             $("#fiveDayW").find('[data-type="weatherLogo"]').eq(i).attr("src", "https://openweathermap.org/img/wn/" + icon + ".png");
                             $("#fiveDayW").find('[data-type="temperature"]').eq(i).text("Temp: " + temp + "\u00B0F");
                             $("#fiveDayW").find('[data-type="humidity"]').eq(i).text("Humidity: " + humidity + "%");
